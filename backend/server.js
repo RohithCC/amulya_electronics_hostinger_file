@@ -14,14 +14,13 @@ import heroBannerRouter from './routes/heroBannerRoute.js'
 import showcaseBannerRouter from './routes/showcaseBannerRoute.js'
 import paymentRoutes from './routes/PaymentRouter.js'
 import orderRoutes from './routes/OrderRouter.js'
-import couponRoutes   from "./routes/couponRoutes.js";
-import deliveryRoutes from "./routes/deliveryRoutes.js";
-import CaegoryRoutes from "./routes/categoryRoute.js";
-import blogRoutes from "./routes/Blogroutes.js";
-import testimonialRoutes from "./routes/Testimonialroutes.js";
-import searchRouter from './routes/searchRoute.js';
-import projectRoutes from "./routes/projectRoutes.js";
-
+import couponRoutes from "./routes/couponRoutes.js"
+import deliveryRoutes from "./routes/deliveryRoutes.js"
+import CaegoryRoutes from "./routes/categoryRoute.js"
+import blogRoutes from "./routes/Blogroutes.js"
+import testimonialRoutes from "./routes/Testimonialroutes.js"
+import searchRouter from './routes/searchRoute.js'
+import projectRoutes from "./routes/projectRoutes.js"
 
 // App Config
 const app = express()
@@ -33,31 +32,30 @@ connectCloudinary()
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ limit: '10mb', extended: true }))
 
-// ✅ Correct — allow both frontend AND admin
+// ✅ CORS - All allowed origins (hardcoded + env)
 const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  process.env.ADMIN_URL,
-  "https://amulya-frontend.onrender.com",  // local frontend
-  "https://amulya-admin.onrender.com",  // local admin
- "http://localhost:5173",
-  "http://localhost:5174"
-];
+  "https://askpoint.online",
+  "https://www.askpoint.online",
+  "https://admin.askpoint.online",
+  "https://api.askpoint.online"
+].filter(Boolean) // removes undefined if env vars not set
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, Postman)
-    if (!origin) return callback(null, true);
-    
+    // Allow requests with no origin (Postman, mobile apps)
+    if (!origin) return callback(null, true)
+
     if (allowedOrigins.includes(origin)) {
-      callback(null, true);
+      callback(null, true)
     } else {
-      callback(new Error(`CORS blocked: ${origin}`));
+      console.log("❌ CORS BLOCKED FROM:", origin)
+      callback(new Error(`CORS blocked: ${origin}`))
     }
   },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization", "token"],
-}));
+}))
 
 // api endpoints
 app.use('/api/user', userRouter)
@@ -68,24 +66,21 @@ app.use('/api/blog', BlogRouter)
 app.use('/api/contact', contactRouter)
 app.use('/api/footer', footerRouter)
 app.use('/api/hero-banner', heroBannerRouter)
-app.use('/api/showcase', showcaseBannerRouter)  
-app.use("/api/payment", paymentRoutes);
-app.use("/api/orders", orderRoutes);
-app.use("/api/category", CaegoryRoutes);
-app.use('/api/search', searchRouter);
+app.use('/api/showcase', showcaseBannerRouter)
+app.use("/api/payment", paymentRoutes)
+app.use("/api/orders", orderRoutes)
+app.use("/api/category", CaegoryRoutes)
+app.use('/api/search', searchRouter)
+app.use("/api/testimonials", testimonialRoutes)
+app.use("/api/blogs", blogRoutes)
+app.use("/api/projects", projectRoutes)
 
+// delivery and coupons
+app.use("/api/coupons", couponRoutes)
+app.use("/api/delivery", deliveryRoutes)
 
-app.use("/api/testimonials", testimonialRoutes);
-app.use("/api/blogs", blogRoutes);
-app.use("/api/projects", projectRoutes);
-
-
-//delivery and coupones
-app.use("/api/coupons", couponRoutes);
-app.use("/api/delivery", deliveryRoutes);
-
-app.get('/',(req,res)=>{
-    res.send("API Working")
+app.get('/', (req, res) => {
+  res.send("API Working ✅")
 })
 
-app.listen(port, ()=> console.log('Server started on PORT : '+ port)) 
+app.listen(port, () => console.log('Server started on PORT: ' + port))
