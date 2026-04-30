@@ -24,7 +24,7 @@ import projectRoutes from "./routes/projectRoutes.js"
 
 // App Config
 const app = express()
-const port = process.env.PORT || 10000
+const port = process.env.PORT || 4000
 connectDB()
 connectCloudinary()
 
@@ -32,19 +32,20 @@ connectCloudinary()
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ limit: '10mb', extended: true }))
 
-// ✅ CORS - All allowed origins (hardcoded + env)
+// ✅ Allowed Origins
 const allowedOrigins = [
   "https://askpoint.online",
   "https://www.askpoint.online",
   "https://admin.askpoint.online",
-  "https://api.askpoint.online"
-].filter(Boolean) // removes undefined if env vars not set
+  "https://api.askpoint.online",
+  "http://localhost:5173",
+  "http://localhost:5174",
+]
 
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (Postman, mobile apps)
+    // Allow Postman, mobile apps (no origin)
     if (!origin) return callback(null, true)
-
     if (allowedOrigins.includes(origin)) {
       callback(null, true)
     } else {
@@ -55,7 +56,13 @@ app.use(cors({
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization", "token"],
-}))
+}
+
+// ✅ MUST BE BEFORE ALL ROUTES - Handle preflight OPTIONS requests
+app.options('*', cors(corsOptions))
+
+// ✅ Apply CORS to all routes
+app.use(cors(corsOptions))
 
 // api endpoints
 app.use('/api/user', userRouter)
