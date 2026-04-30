@@ -2,7 +2,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'
+const API_BASE = import.meta.env.VITE_BACKEND_URL
 
 // ✅ Backend reads req.headers.token — NOT Authorization: Bearer
 const authHeader = (token) => ({ token })
