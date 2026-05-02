@@ -49,7 +49,7 @@ const DEFAULTS = {
   newsletterSubtitle: 'Deals, new arrivals, and electronics tips — delivered to your inbox.',
   playStoreLink:      '#',
   appStoreLink:       '#',
-  copyrightText:      'Designed by Team Up Box © 2026 Amulya Electronics. All rights reserved.',
+  copyrightText:      '© 2026 Amulya Electronics. All rights reserved.',
   trustBadges: [
     { emoji: '🚚', text: 'Free Shipping above ₹999' },
     { emoji: '🔒', text: 'Secure Payments' },
@@ -243,7 +243,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Policies + App */}
+          {/* Policies */}
           <div className="col-span-12 lg:col-span-3">
             <h4 className="text-white font-black text-base mb-5 border-l-4 border-green-500 pl-3">Policies</h4>
             <ul className="space-y-2 mb-8">
@@ -258,30 +258,20 @@ export default function Footer() {
               ))}
             </ul>
 
-            {/* App download */}
-            <div className="bg-gray-800 rounded-2xl p-4">
-              <p className="text-white font-black text-sm mb-1">📱 Download Our App</p>
-              <p className="text-xs text-gray-400 mb-3">Get 15% off your first purchase</p>
-              <div className="flex flex-col gap-2">
-                <a href={s.playStoreLink}
-                  className="flex items-center gap-2 bg-black hover:bg-gray-700 text-white rounded-xl px-3 py-2 transition-colors">
-                  <span className="text-lg">▶</span>
-                  <div className="leading-none">
-                    <p className="text-[9px] text-gray-400">GET IT ON</p>
-                    <p className="text-xs font-bold">Google Play</p>
-                  </div>
-                </a>
-                <a href={s.appStoreLink}
-                  className="flex items-center gap-2 bg-black hover:bg-gray-700 text-white rounded-xl px-3 py-2 transition-colors">
-                  <span className="text-lg"></span>
-                  <div className="leading-none">
-                    <p className="text-[9px] text-gray-400">DOWNLOAD ON THE</p>
-                    <p className="text-xs font-bold">App Store</p>
-                  </div>
-                </a>
-              </div>
+            {/* Developed by */}
+            <div className="text-xs text-gray-500">
+              Developed by{' '}
+              <a
+                href="https://teamupbox.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
+              >
+                Team Up Box
+              </a>
             </div>
           </div>
+
         </div>
 
         {/* ── MOBILE ACCORDION ── */}
@@ -355,34 +345,24 @@ export default function Footer() {
             </ul>
           </FooterAccordion>
 
-          <div className="bg-gray-800 rounded-2xl p-4 mt-4">
-            <p className="text-white font-black text-sm mb-1">📱 Download Our App</p>
-            <p className="text-xs text-gray-400 mb-3">15% off your first purchase</p>
-            <div className="flex gap-3">
-              <a href={s.playStoreLink}
-                className="flex items-center gap-2 bg-black text-white rounded-xl px-3 py-2 flex-1 justify-center text-xs font-bold">
-                ▶ Google Play
-              </a>
-              <a href={s.appStoreLink}
-                className="flex items-center gap-2 bg-black text-white rounded-xl px-3 py-2 flex-1 justify-center text-xs font-bold">
-                 App Store
-              </a>
-            </div>
-          </div>
         </div>
       </div>
 
       {/* ── BOTTOM BAR ── */}
-      <div className="border-t border-gray-700 py-5 px-4">
-        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-center md:text-left">{s.copyrightText}</p>
-          <div className="flex items-center gap-2 flex-wrap justify-center">
-            {['VISA', 'MC', 'UPI', 'Paytm', 'GPay', 'RazorPay'].map((p) => (
-              <span key={p} className="bg-gray-700 text-gray-300 text-[10px] font-bold px-2.5 py-1 rounded-md">
-                {p}
-              </span>
-            ))}
-          </div>
+      <div className="border-t border-gray-800 py-5 px-4">
+        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-gray-500 text-center">
+          <span>{s.copyrightText}</span>
+          <span>
+            Developed by{' '}
+            <a
+              href="https://teamupbox.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
+            >
+              Team Up Box
+            </a>
+          </span>
         </div>
       </div>
 
