@@ -19,7 +19,7 @@ import TestimonialsAndBlogAdmin from './pages/Testimonialsandblogadmin'
 import ShowcaseBanners from './pages/ShowcaseBanners'
 import ProjectsAdminPage from "./pages/ProjectsAdmin";
 
-export const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'
+export const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:10000'
 export const currency = '₹'
 
 const App = () => {
@@ -28,10 +28,10 @@ const App = () => {
   useEffect(() => { localStorage.setItem('token', token) }, [token])
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0a0f1e', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+    <div style={{ minHeight: '100vh', background: '#d2deff', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
       <ToastContainer
         position="top-right" autoClose={3000} theme="dark"
-        toastStyle={{ background: '#0d1a2e', border: '1px solid #00c2ff33', color: '#e2e8f0' }}
+        toastStyle={{ background: '#d2deff', border: '1px solid #00c2ff33', color: '#e2e8f0' }}
       />
 
       {token === '' ? (
@@ -44,7 +44,7 @@ const App = () => {
           <div className="flex w-full">
             <Sidebar />
             <main className="flex-1 min-h-screen" style={{
-              background: '#0a0f1e',
+              background: '#d2deff',
               padding: '32px clamp(16px, 4vw, 40px)',
               overflowX: 'hidden',
             }}>

@@ -279,6 +279,7 @@ const Navbar = () => {
               */}
 
               <NavLink to="/collection" className={navClass}>Product Catalog</NavLink>
+               <NavLink to="/about" className={navClass}>About</NavLink>
               <NavLink to="/contact"    className={navClass}>Contact</NavLink>
             </nav>
           </div>
